@@ -79,10 +79,14 @@ export default {
           messageTextArray.push(subMsg);
         });
         text = "";
-        shouldRedactResponse= regex.test(nextMessage);
+        if (state.config.connect.transcriptRedactRegex) {
+          shouldRedactResponse= regex.test(nextMessage);
+        }
         nextMessage = "";
       } else {
-        shouldRedactResponse= regex.test(nextMessage);
+        if (state.config.connect.transcriptRedactRegex) {
+          shouldRedactResponse= regex.test(nextMessage);
+        }
       }
       text = text + nextMessage;
     });
